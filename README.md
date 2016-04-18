@@ -8,4 +8,8 @@
 
 # BASIC OPERATIONS
 ## Architecture
-![](https://docs.google.com/drawings/d/1MmPRBNi2ZKFvsGsDZh7r5SFJ-9UI52F8PCqgoplOGNw/pub?w=910&h=2646)
+![](https://docs.google.com/drawings/d/1MmPRBNi2ZKFvsGsDZh7r5SFJ-9UI52F8PCqgoplOGNw/pub?w=910&h=2646) 
+
+# Wiring
+* http://communityofrobots.com/tutorial/kawal/how-use-sharp-ir-sensor-arduino
+
