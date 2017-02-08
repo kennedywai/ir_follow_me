@@ -122,7 +122,7 @@ void DistCB(const geometry_msgs::Vector3& msg){
     mode_msg->data=99;
     listen_count++;
     if(listen_count>30){
-	mode_msg->data=100;
+	    mode_msg->data=100;
     }
   }
   if (ir_value[1]<max_dist && ir_value[2]>max_dist && ir_value[3]>max_dist){   
@@ -181,8 +181,6 @@ void DistCB(const geometry_msgs::Vector3& msg){
 
     mode_pub_.publish(mode_msg);
 
-
-
 /*
   target_x_ir=min(ir_value,3);
   ml=(float)(ir_value[0]-ir_value[1])/10;
@@ -194,7 +192,6 @@ void DistCB(const geometry_msgs::Vector3& msg){
   if (target_y_ir <=-20)
     target_y_ir=-20;
 */
-
 
 //////////////////////////////////////////////////////
 //  ir sensor target filter 
