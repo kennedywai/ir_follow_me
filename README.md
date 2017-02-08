@@ -1,10 +1,10 @@
 # ir_follow_me
 
 # launch
-                $ launch ir_follow_me nextbot_test.launch
+$ roslaunch ir_follow_me 87rugby_ir_follow_me_test.launch
 
 # run
-                $ rosrun ir_follow_me ir5_tracking
+$ rosrun ir_follow_me ir5_tracking
 
 # BASIC OPERATIONS
 ## Architecture

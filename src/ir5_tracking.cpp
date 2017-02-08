@@ -99,16 +99,16 @@ void DistCB(const geometry_msgs::Vector3& msg){
   last_time=current_time;
 
   ir_value[1]=msg.x;ir_value[2]=msg.y;ir_value[3]=msg.z;
-/*------------------------------
-// limit range 160cm
--------------------------------*/
+  /*------------------------------
+  // limit range 160cm
+  -------------------------------*/
   for (int i=0;i<5;i++){
 	if (ir_value[i]>limit_dist)
 	  ir_value[i]=limit_dist;
   }
 
 ///////////////////////////////////////////////////
-//  sensor ir_value to decision target pos
+//sensor ir_value to decision target pos
 //double d10=ir_value[1]-ir_value[0];
 //double d20=ir_value[2]-ir_value[0];
 //double d10=ir_value[1]-ir_value[0];
