@@ -49,8 +49,7 @@ double listen_count=0;
 
 ros::Time current_time, last_time;
 
-double min( double arr[], int len )
-{
+double min( double arr[], int len ){
     double min = arr[0];
 
     for ( int i = 1; i < len; i++ )
@@ -60,27 +59,21 @@ double min( double arr[], int len )
     return min;
 }
 
-class IR_Tracking
-{
+class IR_Tracking{
   public:
   ros::NodeHandle nh_;
   ros::Publisher cmd_pub_,target_xy_pub_ir_,people_pub_,mode_pub_;
   ros::Subscriber cmd_sub_,cmd_sub_side_,odom_sub_;//camera_sub_;
-  IR_Tracking()
-  {
-    odom_sub_ = nh_.subscribe("/andbot/odom_diffdrive", 1 ,&IR_Tracking::OdomCB,this);
-
+  IR_Tracking(){
+    odom_sub_ = nh_.subscribe("/rugby/odom", 1 ,&IR_Tracking::OdomCB,this);
     cmd_sub_ = nh_.subscribe("/sensor/ir_value", 1 ,&IR_Tracking::DistCB,this);
     cmd_sub_side_ = nh_.subscribe("/sensor/ir_value_side", 1 ,&IR_Tracking::DistCB_SIDE,this);
 
-//    camera_sub_ = nh_.subscribe("/target_xywh", 1 ,&IR_Tracking::CameraCB,this);
-
-
-    cmd_pub_ = nh_.advertise<geometry_msgs::Twist>("/andbot/cmd_vel", 1);
+    //camera_sub_ = nh_.subscribe("/target_xywh", 1 ,&IR_Tracking::CameraCB,this);
+    cmd_pub_ = nh_.advertise<geometry_msgs::Twist>("/rugby/cmd_vel", 1);
     target_xy_pub_ir_ = nh_.advertise<geometry_msgs::Vector3>("/target_xy_ir", 1);
     people_pub_ = nh_.advertise<geometry_msgs::Vector3>("/target_people", 1);
     mode_pub_ = nh_.advertise<std_msgs::Int8>("/sensor/ir_mode", 1);
- 
 
   }
 /*
@@ -105,17 +98,14 @@ void DistCB(const geometry_msgs::Vector3& msg){
   double dt = (current_time - last_time).toSec();
   last_time=current_time;
 
-
   ir_value[1]=msg.x;ir_value[2]=msg.y;ir_value[3]=msg.z;
 /*------------------------------
 // limit range 160cm
 -------------------------------*/
-  for (int i=0;i<5;i++)
-  {
+  for (int i=0;i<5;i++){
 	if (ir_value[i]>limit_dist)
 	  ir_value[i]=limit_dist;
   }
-
 
 ///////////////////////////////////////////////////
 //  sensor ir_value to decision target pos
@@ -245,8 +235,6 @@ void DistCB(const geometry_msgs::Vector3& msg){
     target_v=0.03*(error_d);
     target_w=4*target_th;
 
-
-
     error_v=(float)target_v-odom_v;
     error_v_sum=error_v_sum+error_v;
     if(error_v_sum>70) error_v_sum=70;
@@ -310,10 +298,9 @@ void DistCB(const geometry_msgs::Vector3& msg){
     else if (cmd_w<=-lim_tw) cmd_w=-lim_tw;
 
     if(mode_msg->data==100){
-	cmd_v=0;
-	cmd_w=0;
+	    cmd_v=0;
+	    cmd_w=0;
     }
-	
 
     cmd->linear.x=cmd_v;
     cmd->angular.z=cmd_w;
@@ -336,19 +323,16 @@ void DistCB(const geometry_msgs::Vector3& msg){
   cmd->angular.z = 0;
   cmd_pub_.publish(cmd);
 */
-
 }
+
 void DistCB_SIDE(const geometry_msgs::Vector3& msg1){
   ir_value[0]=msg1.x;ir_value[4]=msg1.y;
-
 }
-
 
 };
 
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv){
   ros::init(argc, argv, "ir5_tracking");
   IR_Tracking it;
   ros::spin();
