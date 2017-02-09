@@ -265,14 +265,14 @@ void DistCB(const geometry_msgs::Vector3& msg){
     }
 */
 
-    lim_tv=0.8,lim_dv=(float)lim_tv/1;
+    lim_tv=0.6,lim_dv=(float)lim_tv/1;
     lim_tw=0.2,lim_dw=(float)lim_tw/2;
     if(mode_msg->data==-2||mode_msg->data==-1||mode_msg->data==1||mode_msg->data==2){
-      lim_tv=0.6,lim_dv=(float)lim_tv/5;
+      lim_tv=0.4,lim_dv=(float)lim_tv/5;
       lim_tw=1.5;lim_dw=(float)lim_tw/1;
     }
     if(mode_msg->data==-3||mode_msg->data==3){
-      lim_tv=0.4,lim_dv=(float)lim_tv/5;
+      lim_tv=0.2,lim_dv=(float)lim_tv/5;
       lim_tw=1.5;lim_dw=(float)lim_tw/1;
     }
 
