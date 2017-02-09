@@ -23,8 +23,8 @@ double error_v=0,error_w=0,error_v_sum=0,error_w_sum=0;
 double delta_v=0,delta_w=0;
 double cmd_v=0,cmd_w=0;
 
-double min_dist=25.0;
-double keep_range_in=30.0,keep_range_out=50.0;
+double min_dist=35.0;
+double keep_range_in=40.0,keep_range_out=60.0;
 double track_dist=min_dist+keep_range_in;
 double max_dist=min_dist+keep_range_in+keep_range_out;
 double max_dist_side=max_dist*0.7;
@@ -100,7 +100,7 @@ void DistCB(const geometry_msgs::Vector3& msg){
 
   ir_value[1]=msg.x;ir_value[2]=msg.y;ir_value[3]=msg.z;
   /*------------------------------
-  // limit range 160cm
+  // limit range 150cm
   -------------------------------*/
   for (int i=0;i<5;i++){
 	if (ir_value[i]>limit_dist)
