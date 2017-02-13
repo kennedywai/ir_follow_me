@@ -23,8 +23,8 @@ double error_v=0,error_w=0,error_v_sum=0,error_w_sum=0;
 double delta_v=0,delta_w=0;
 double cmd_v=0,cmd_w=0;
 
-double min_dist=25.0;
-double keep_range_in=30.0,keep_range_out=50.0;
+double min_dist=45.0;
+double keep_range_in=50.0,keep_range_out=70.0;
 double track_dist=min_dist+keep_range_in;
 double max_dist=min_dist+keep_range_in+keep_range_out;
 double max_dist_side=max_dist*0.7;
@@ -68,15 +68,11 @@ class IR_Tracking
   ros::Subscriber cmd_sub_,cmd_sub_side_,odom_sub_;//camera_sub_;
   IR_Tracking()
   {
-    odom_sub_ = nh_.subscribe("/andbot/odom_diffdrive", 1 ,&IR_Tracking::OdomCB,this);
-
+    odom_sub_ = nh_.subscribe("/rugby/odom", 1 ,&IR_Tracking::OdomCB,this);
     cmd_sub_ = nh_.subscribe("/sensor/ir_value", 1 ,&IR_Tracking::DistCB,this);
     cmd_sub_side_ = nh_.subscribe("/sensor/ir_value_side", 1 ,&IR_Tracking::DistCB_SIDE,this);
-
 //    camera_sub_ = nh_.subscribe("/target_xywh", 1 ,&IR_Tracking::CameraCB,this);
-
-
-    cmd_pub_ = nh_.advertise<geometry_msgs::Twist>("/andbot/cmd_vel", 1);
+    cmd_pub_ = nh_.advertise<geometry_msgs::Twist>("/rugby/cmd_vel", 1);
     target_xy_pub_ir_ = nh_.advertise<geometry_msgs::Vector3>("/target_xy_ir", 1);
     people_pub_ = nh_.advertise<geometry_msgs::Vector3>("/target_people", 1);
     mode_pub_ = nh_.advertise<std_msgs::Int8>("/sensor/ir_mode", 1);
